@@ -15,7 +15,6 @@ class App extends Component {
   }
   
   handleDeleteFood = (idx) => {
-//    const idx = this.state.selectedFoods.findIndex(f => f === food )
     this.setState({
       selectedFoods: [...this.state.selectedFoods.slice(0, idx),
                      ...this.state.selectedFoods.slice(idx + 1)]
