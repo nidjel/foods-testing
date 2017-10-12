@@ -7,10 +7,13 @@ Enzyme.configure({ adapter: new Adapter() })
 
 describe('App', () => {
   let wrapper
+  
   beforeEach(() => wrapper = shallow(<App />))
+             
   it('should initialize `selectedFoods` in state as empty array', () => {
     expect(wrapper.state().selectedFoods).toEqual([])
   })
+  
   describe('when `FoodSearch` invokes `handleAddFood` twice', () => {
     const food1 = {
      description: 'food1',            
@@ -27,17 +30,30 @@ describe('App', () => {
      carbohydrate_g: 1
     }
     const foods = [food1, food2]
+    
     beforeEach(() => {
       wrapper.find('FoodSearch').props().onFoodClick(food1)
       wrapper.find('FoodSearch').props().onFoodClick(food2)
     })
+    
     it('should add the foods at `selectedFoods` in state', () => {
       expect(wrapper.state().selectedFoods).toEqual(foods)
     })
+    
+    describe('and then `FoodSearch` invokes one more time with the same `food', () => {
+      beforeEach(() => {
+        wrapper.find('FoodSearch').props().onFoodClick(food1)
+      })
+      it('should not add `food` to state', () => {
+        expect(wrapper.state().selectedFoods.length).toBe(2)
+      })
+    })
+    
     describe('and then `SelectedFoods` invoke `handleDeleteFood`', () => {
       beforeEach(() => {
         wrapper.find('SelectedFoods').props().onFoodClick(0)
       })
+      
       it('should delete the food at idx from array in state', () => {
         expect(wrapper.state().selectedFoods[0]).toEqual(food2)
       })

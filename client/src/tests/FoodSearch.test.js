@@ -25,7 +25,7 @@ describe('FoodSearch', () => {
     expect(wrapper.state().foods).toEqual([])
   })
   
-  it('should dispaly no rows with food', () => {
+  it('should display no rows with food', () => {
     expect(wrapper.find('table tbody tr').length).toBe(0)
   })
   

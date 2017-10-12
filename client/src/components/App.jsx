@@ -8,7 +8,7 @@ class App extends Component {
   }
 
   handleAddFood = (food) => {
-    if (this.state.selectedFoods.includes(food)) return
+    if (this.state.selectedFoods.some(f => food.description === f.description)) return
     this.setState({
       selectedFoods: [...this.state.selectedFoods, food]
     })
