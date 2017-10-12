@@ -27,7 +27,7 @@ class FoodSearch extends Component {
   }
   
   handleFoodClick = (i) => {
-    this.props.onFoodClick(this.state.foods[i])
+    this.props.onFoodClick({...this.state.foods[i]})
   }
   
   handleClearInputButtonClick = () => {
